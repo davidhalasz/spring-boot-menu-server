@@ -30,6 +30,7 @@ public class JwtProviderImpl implements JwtProvider {
     @Value("${app.jwt.expiration-in.ms}")
     private String JWT_EXPIRATION_IN_MS;
 
+    @Override
     public String generateToken(UserPrincipal auth) {
         String authorities = auth.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
