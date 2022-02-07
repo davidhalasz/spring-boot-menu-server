@@ -16,10 +16,6 @@ public class Menu {
     @Column(name = "user_id", nullable = false)
     private String user_id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private User user;
-
     @Column(name = "products", nullable = false)
-    private List<String> products;
+    private String products;
 }

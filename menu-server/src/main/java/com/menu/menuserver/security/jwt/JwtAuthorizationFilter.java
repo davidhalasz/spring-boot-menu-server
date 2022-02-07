@@ -1,6 +1,5 @@
 package com.menu.menuserver.security.jwt;
 
-import org.apache.catalina.filters.ExpiresFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,14 +17,14 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     private JwtProvider jwtProvider;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
+    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
                                     FilterChain filterChain) throws ServletException, IOException {
-        Authentication authentication = jwtProvider.getAuthentication(request);
+        Authentication authentication = jwtProvider.getAuthentication(httpServletRequest);
 
-        if (authentication != null && jwtProvider.isTokenValid(request)) {
+        if (authentication != null && jwtProvider.isTokenValid(httpServletRequest)) {
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
-        filterChain.doFilter(request, response);
+        filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 }

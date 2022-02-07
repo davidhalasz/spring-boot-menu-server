@@ -25,7 +25,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         Set<GrantedAuthority> authorities = Set.of(SecurityUtils.convertToAuthority(user.getRole().name()));
 
-
         return UserPrincipal.builder()
                 .user(user)
                 .id(user.getId())
