@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
+@PropertySource("classpath:application-${spring.profiles.active:default}.properties")
 public class MenuServerApplication {
 
 	public static void main(String[] args) {
