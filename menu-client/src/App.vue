@@ -8,14 +8,14 @@
               Home
             </router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-if="isUser">
             <router-link class="nav-link" to="/profile" active-class="active">
               Profile
             </router-link>
           </li>
         </div>
 
-        <div class="navbar-nav ms-auto">
+        <div class="navbar-nav ms-auto" v-if="!currentUser">
           <li class="nav-item">
             <router-link class="nav-link" to="/register" active-class="active">
               Sign Up
@@ -27,6 +27,12 @@
             </router-link>
           </li>
         </div>
+
+        <div class="navbar-nav ms-auto" v-if="currentUser">
+          <li class="nav-item">
+            <a href="#" class="nav-link" @click="logout">Logout</a>
+          </li>
+        </div>
       </div>
     </nav>
 
@@ -35,5 +41,26 @@
     </div>
   </div>
 </template>
+
+<script>
+import vuex from 'vuex';
+import Role from './models/role';
+
+export default {
+  computed: {
+    ...vuex.mapGetters(['currentUser']),
+    isUser() {
+      return this.currentUser?.role == Role.USER;
+    },
+  },
+  methods: {
+    ...vuex.mapActions(['clearUser']),
+    logout() {
+      this.clearUser();
+      this.$router.push('/login');
+    },
+  },
+}
+</script>
 
 <style></style>

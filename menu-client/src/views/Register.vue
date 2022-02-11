@@ -113,4 +113,7 @@ h3 {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+label {
+  color: antiquewhite;
+}
 </style>
