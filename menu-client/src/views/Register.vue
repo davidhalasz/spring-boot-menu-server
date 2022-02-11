@@ -37,7 +37,7 @@
             required
           />
           <div class="invalid-feedback">Password is required.</div>
-        </div>
+        </div>+
 
         <button
           class="btn btn-success w-100 mt-5"
