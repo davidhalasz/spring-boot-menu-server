@@ -2,7 +2,7 @@ import { BASE_API_URL } from "../common/Constants";
 import axios from "axios";
 import { authHeader } from "./base.service";
 
-const API_URL = BASE_API_URL + "api/menu";
+const API_URL = BASE_API_URL + "/api/menu";
 
 class MenuService {
   saveMenu(menu) {
@@ -15,6 +15,10 @@ class MenuService {
 
   displayMenu(menu) {
     return axios.get(API_URL + "/" + menu.id, { headers: authHeader() });
+  }
+
+  getAllMenus() {
+    return axios.get(API_URL, { headers: authHeader() });
   }
 }
 

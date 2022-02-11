@@ -20,9 +20,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>menud</td>
-                <td>menudesc</td>
+              <tr v-for="(item, ind) in menuList" :key="ind">
+                <td>{{ item.id }}</td>
+                <td>{{ item.products }}</td>
                 <td><button class="btn btn-primary">Edit</button></td>
                 <td><button class="btn btn-danger">Delete</button></td>
               </tr>
@@ -36,19 +36,23 @@
 
 <script>
 import MenuService from "../services/menu.service";
-import Menu from "../models/menu";
+import vuex from "vuex";
+
 export default {
   name: "profile",
   data() {
     return {
-      menu: new Menu(),
+      menuList: [],
     };
   },
+  computed: {
+    ...vuex.mapGetters(["currentUser"]),
+  },
   mounted() {
-    MenuService.displayMenu().then(response => {
-      this.menu = response.data;
+    MenuService.getAllMenus().then((response) => {
+      this.menuList = response.data;
     });
-  }
+  },
 };
 </script>
 

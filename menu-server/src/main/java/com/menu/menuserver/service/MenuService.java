@@ -1,6 +1,7 @@
 package com.menu.menuserver.service;
 
 import com.menu.menuserver.model.Menu;
+import com.menu.menuserver.repository.projection.MenuItem;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,5 +13,5 @@ public interface MenuService {
 
     Optional<Menu> findById(Long menuId);
 
-    List<Menu> findMenusByUserId(Long userId);
+    List<MenuItem> findMenusByUserId(Long userId);
 }
