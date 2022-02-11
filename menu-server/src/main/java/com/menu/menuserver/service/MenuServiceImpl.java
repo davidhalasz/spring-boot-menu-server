@@ -6,6 +6,7 @@ import com.menu.menuserver.repository.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,5 +32,10 @@ public class MenuServiceImpl implements MenuService {
     public Optional<Menu> findById(Long menuId)
     {
         return menuRepository.findById(menuId);
+    }
+
+    @Override
+    public List<Menu> findMenusByUserId(Long userId) {
+        return menuRepository.findAllMenusByUserId(userId);
     }
 }
