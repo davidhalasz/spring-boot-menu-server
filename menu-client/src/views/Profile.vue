@@ -7,6 +7,11 @@
             <div class="col-6">
               <h3>Added Menu</h3>
             </div>
+            <div class="col-6 text-end">
+              <button class="btn btn-primary" @click="createNewMenu">
+                New Menu
+              </button>
+            </div>
           </div>
         </div>
 
@@ -32,17 +37,23 @@
       </div>
     </div>
   </div>
+
+  <menu-modal ref="menuModal"/>
 </template>
 
 <script>
 import MenuService from "../services/menu.service";
+import MenuModal from "../components/Menu.vue";
+import Menu from "../models/menu";
 import vuex from "vuex";
 
 export default {
   name: "profile",
+  components: { MenuModal },
   data() {
     return {
       menuList: [],
+      selectedMenu: new Menu(),
     };
   },
   computed: {
@@ -52,6 +63,11 @@ export default {
     MenuService.getAllMenus().then((response) => {
       this.menuList = response.data;
     });
+  },
+  methods: {
+    createNewMenu() {
+      this.$refs["menuModal"].showMenuModal();
+    },
   },
 };
 </script>

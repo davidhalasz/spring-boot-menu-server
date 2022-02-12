@@ -1,6 +1,7 @@
 export default class Menu {
-  constructor(id, products) {
+  constructor(id, userId, products) {
     this.id = id;
+    this.userId = userId;
     this.products = products;
   }
 }
