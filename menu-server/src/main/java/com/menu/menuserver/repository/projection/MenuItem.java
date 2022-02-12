@@ -2,5 +2,9 @@ package com.menu.menuserver.repository.projection;
 
 public interface MenuItem {
     Long getId();
-    String getProducts();
+    Long getUserId();
+    String getCompanyName();
+    String[] getTypes();
+    String[] getProducts();
+    Integer[] getPrices();
 }

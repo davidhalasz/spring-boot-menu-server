@@ -5,6 +5,7 @@ import store from "./store";
 
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 global.jQuery = require("jquery");
 const $ = global.jQuery;
@@ -13,6 +14,7 @@ window.$ = $;
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
+
 
 library.add(faHome);
 

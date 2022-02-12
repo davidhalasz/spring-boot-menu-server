@@ -10,7 +10,8 @@ import java.util.List;
 
 public interface MenuRepository extends JpaRepository<Menu, Long> {
     @Query("select " +
-            "m.id as id, m.products as products " +
+            "m.id as id, m.userId as userId, m.companyName as companyName, " +
+            "m.types as types, m.products as products, m.prices as prices " +
             "from Menu m " +
             "where m.userId = :userId")
     List<MenuItem> findAllMenusByUserId(@Param("userId") Long userId);

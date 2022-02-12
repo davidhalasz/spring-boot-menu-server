@@ -28,8 +28,11 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "userId", nullable = false)
     private Long userId;
+
+    @Column(name = "companyName", nullable = false)
+    private String companyName;
 
     @Type(type = "string-array")
     @Column(

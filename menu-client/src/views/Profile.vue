@@ -19,15 +19,15 @@
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">username</th>
-                <th scope="col">description</th>
+                <th scope="col">#</th>
+                <th scope="col">Company Name</th>
                 <th scope="col">action</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(item, ind) in menuList" :key="ind">
-                <td>{{ item.id }}</td>
-                <td>{{ item.products }}</td>
+                <td>{{ ind + 1 }}</td>
+                <td>{{ item.companyName }}</td>
                 <td><button class="btn btn-primary">Edit</button></td>
                 <td><button class="btn btn-danger">Delete</button></td>
               </tr>
@@ -38,7 +38,7 @@
     </div>
   </div>
 
-  <menu-modal ref="menuModal"/>
+  <menu-modal ref="menuModal" />
 </template>
 
 <script>
@@ -62,6 +62,7 @@ export default {
   mounted() {
     MenuService.getAllMenus().then((response) => {
       this.menuList = response.data;
+      console.log(this.menuList);
     });
   },
   methods: {
