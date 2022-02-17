@@ -1,6 +1,9 @@
 <template>
   <div class="container">
     <div class="mt-5">
+      <div class="alert alert-danger" v-if="errorMessage">
+        {{ errorMessage }}
+      </div>
       <div class="card">
         <div class="card-header">
           <div class="row">
@@ -19,9 +22,9 @@
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Company Name</th>
-                <th scope="col">action</th>
+                <th scope="col" style="width: 10%">#</th>
+                <th scope="col" style="width: 80%">Company Name</th>
+                <th scope="col" style="width: 10%">action</th>
               </tr>
             </thead>
             <tbody>
@@ -36,7 +39,14 @@
                     Edit
                   </button>
                 </td>
-                <td><button class="btn btn-danger">Delete</button></td>
+                <td>
+                  <button
+                    class="btn btn-danger"
+                    @click="deleteSelectedMenuModal(menu, ind)"
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -50,23 +60,27 @@
     @saved="menuSaved"
     :selected-menu="selectedMenu"
   />
+
+  <menu-delete-modal ref="deleteMenuModal" @confirmed="deleteSelectedMenu" />
 </template>
 
 <script>
 import MenuService from "../services/menu.service";
 import MenuModal from "../components/Menu.vue";
+import MenuDeleteModal from "../components/MenuDeleteModal.vue";
 import Menu from "../models/menu";
 import vuex from "vuex";
 import { nextTick } from "@vue/runtime-core";
 
 export default {
   name: "profile",
-  components: { MenuModal },
+  components: { MenuModal, MenuDeleteModal },
   data() {
     return {
       menuList: [],
       selectedMenu: new Menu(),
       errorMessage: "",
+      selectedIndex: undefined,
     };
   },
   computed: {
@@ -97,6 +111,24 @@ export default {
       this.selectedMenu = Object.assign({}, menu);
       nextTick(() => {
         this.$refs["menuModal"].showMenuModal();
+      });
+    },
+    deleteSelectedMenu() {
+      MenuService.deleteMenu(this.selectedMenu)
+        .then(() => {
+          this.menuList.splice(this.selectedIndex, 1);
+        })
+        .catch((err) => {
+          this.errorMessage = "An error occured!";
+          console.log(err);
+        });
+    },
+    deleteSelectedMenuModal(menu, index) {
+      this.selectedMenu = menu;
+      this.selectedIndex = index;
+
+      nextTick(() => {
+        this.$refs["deleteMenuModal"].showDeleteModal();
       });
     },
   },
