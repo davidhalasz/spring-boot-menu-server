@@ -25,10 +25,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item, ind) in menuList" :key="ind">
+              <tr v-for="(menu, ind) in menuList" :key="ind">
                 <td>{{ ind + 1 }}</td>
-                <td>{{ item.companyName }}</td>
-                <td><button class="btn btn-primary">Edit</button></td>
+                <td>{{ menu.companyName }}</td>
+                <td>
+                  <button
+                    class="btn btn-primary"
+                    @click="editSelectedMenu(menu)"
+                  >
+                    Edit
+                  </button>
+                </td>
                 <td><button class="btn btn-danger">Delete</button></td>
               </tr>
             </tbody>
@@ -38,7 +45,11 @@
     </div>
   </div>
 
-  <menu-modal ref="menuModal" />
+  <menu-modal
+    ref="menuModal"
+    @saved="menuSaved"
+    :selected-menu="selectedMenu"
+  />
 </template>
 
 <script>
@@ -46,6 +57,7 @@ import MenuService from "../services/menu.service";
 import MenuModal from "../components/Menu.vue";
 import Menu from "../models/menu";
 import vuex from "vuex";
+import { nextTick } from "@vue/runtime-core";
 
 export default {
   name: "profile",
@@ -54,6 +66,7 @@ export default {
     return {
       menuList: [],
       selectedMenu: new Menu(),
+      errorMessage: "",
     };
   },
   computed: {
@@ -67,7 +80,24 @@ export default {
   },
   methods: {
     createNewMenu() {
-      this.$refs["menuModal"].showMenuModal();
+      this.selectedMenu = new Menu();
+      nextTick(() => {
+        this.$refs["menuModal"].showMenuModal();
+      });
+    },
+    menuSaved(menu) {
+      const itemIndex = this.menuList.findIndex((item) => item.id == menu.id);
+      if (itemIndex !== -1) {
+        this.menuList[itemIndex] = menu;
+      } else {
+        this.menuList.push(menu);
+      }
+    },
+    editSelectedMenu(menu) {
+      this.selectedMenu = Object.assign({}, menu);
+      nextTick(() => {
+        this.$refs["menuModal"].showMenuModal();
+      });
     },
   },
 };

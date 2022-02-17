@@ -24,7 +24,7 @@
             <div class="form-group">
               <label for="companyName">Company Name</label>
               <input
-                v-model="companyName"
+                v-model="menu.companyName"
                 type="text"
                 id="companyName"
                 name="companyName"
@@ -129,9 +129,11 @@ import vuex from "vuex";
 
 export default {
   name: "menu-modal",
+  props: {
+    selectedMenu: { type: Object },
+  },
   data() {
     return {
-      companyName: "",
       inputs: [
         {
           types: "starters",
@@ -149,6 +151,15 @@ export default {
   },
   methods: {
     showMenuModal() {
+      this.menu = Object.assign({}, this.selectedMenu);
+      this.inputs = [];
+      for (var i = 0; i < this.selectedMenu.types.length; i++) {
+        this.inputs.push({
+          types: this.selectedMenu.types[i],
+          products: this.selectedMenu.products[i],
+          prices: this.selectedMenu.prices[i],
+        });
+      }
       $("#menuModal").modal("show");
     },
     addInputs(index) {
@@ -166,13 +177,11 @@ export default {
         products: "",
         prices: 0,
       });
-      console.log(this.inputs);
     },
     removeInputs(index) {
       this.inputs.splice(index, 1);
     },
     save() {
-      this.submitted = true;
       var typesLst = [];
       var productsLst = [];
       var pricesLst = [];
@@ -181,23 +190,28 @@ export default {
           if (key == "types") {
             typesLst.push(value);
           }
-
           if (key == "products") {
             productsLst.push(value);
           }
-
           if (key == "prices") {
             pricesLst.push(value);
           }
         }
       });
-
       this.menu.userId = this.currentUser.id;
-      this.menu.companyName = this.companyName;
       this.menu.types = typesLst;
       this.menu.products = productsLst;
       this.menu.prices = pricesLst;
-
+      console.log(this.menu);
+      if (
+        !this.menu.userId ||
+        !this.menu.companyName ||
+        !this.menu.types ||
+        !this.menu.products ||
+        !this.menu.prices
+      ) {
+        return;
+      }
       MenuService.saveMenu(this.menu)
         .then((response) => {
           this.$emit("saved", response.data);
@@ -207,7 +221,6 @@ export default {
           this.errorMessage = "An error occured!";
           console.log(err);
         });
-
     },
   },
 };
