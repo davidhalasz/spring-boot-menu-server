@@ -19,18 +19,30 @@
         </div>
 
         <div class="card-body">
-          <table class="table">
-            <thead>
+          <table class="table table-hover">
+            <thead class="thead-dark bg-dark text-light">
               <tr>
                 <th scope="col" style="width: 10%">#</th>
-                <th scope="col" style="width: 80%">Company Name</th>
-                <th scope="col" style="width: 10%">action</th>
+                <th scope="col" style="width: 60%">Company Name</th>
+                <th scope="col" style="width: 20%">QR code</th>
+                <th scope="col" style="width: 5%"></th>
+                <th scope="col" style="width: 5%"></th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(menu, ind) in menuList" :key="ind">
                 <td>{{ menu.id }}</td>
-                <td>{{ menu.companyName }}</td>
+                <td>
+                  <router-link
+                    :to="{ name: 'displayMenu', params: { id: menu.id } }"
+                  >
+                    {{ menu.companyName }}</router-link
+                  >
+                </td>
+                <td>
+                  <qrcode-vue :value="urls[ind]" size="100" level="H">
+                  </qrcode-vue>
+                </td>
                 <td>
                   <button
                     class="btn btn-primary"
@@ -71,13 +83,15 @@ import MenuDeleteModal from "../components/MenuDeleteModal.vue";
 import Menu from "../models/menu";
 import vuex from "vuex";
 import { nextTick } from "@vue/runtime-core";
+import QrcodeVue from "qrcode.vue";
 
 export default {
   name: "profile",
-  components: { MenuModal, MenuDeleteModal },
+  components: { MenuModal, MenuDeleteModal, QrcodeVue },
   data() {
     return {
       menuList: [],
+      urls: [],
       selectedMenu: new Menu(),
       errorMessage: "",
       selectedIndex: undefined,
@@ -89,6 +103,9 @@ export default {
   mounted() {
     MenuService.getAllMenus().then((response) => {
       this.menuList = response.data;
+      this.menuList.forEach((value) => {
+        this.urls.push("http://localhost:4000/menu/show/" + value.id);
+      });
       console.log(this.menuList);
     });
   },

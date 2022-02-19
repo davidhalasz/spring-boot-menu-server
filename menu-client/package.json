@@ -17,6 +17,7 @@
     "bootstrap-icons": "^1.8.1",
     "core-js": "^3.6.5",
     "jquery": "^3.6.0",
+    "qrcode.vue": "^3.3.3",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
