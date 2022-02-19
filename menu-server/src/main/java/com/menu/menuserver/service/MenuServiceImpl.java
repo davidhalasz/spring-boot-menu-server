@@ -30,9 +30,14 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public Optional<Menu> findById(Long menuId)
-    {
+    public Optional<Menu> findById(Long menuId) {
         return menuRepository.findById(menuId);
+    }
+
+    @Override
+    public Optional<MenuItem> findMenuById(Long menuId)
+    {
+        return menuRepository.findSingleMenuById(menuId);
     }
 
     @Override

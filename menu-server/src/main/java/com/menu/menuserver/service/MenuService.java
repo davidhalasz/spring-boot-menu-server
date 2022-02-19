@@ -13,5 +13,7 @@ public interface MenuService {
 
     Optional<Menu> findById(Long menuId);
 
+    Optional<MenuItem> findMenuById(Long menuId);
+
     List<MenuItem> findMenusByUserId(Long userId);
 }

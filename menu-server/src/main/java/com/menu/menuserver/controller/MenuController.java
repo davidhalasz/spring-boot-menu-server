@@ -28,7 +28,7 @@ public class MenuController {
     }
 
     @GetMapping("{menuId}")
-    public ResponseEntity<?> displayMenu(@PathVariable Long menuId) {
+    public ResponseEntity<?> getMenu(@PathVariable Long menuId) {
         return new ResponseEntity<>(menuService.findById(menuId), HttpStatus.OK);
     }
 
@@ -36,4 +36,5 @@ public class MenuController {
     public ResponseEntity<?> getAllMenusByUserId(@AuthenticationPrincipal UserPrincipal userPrincipal) {
         return ResponseEntity.ok(menuService.findMenusByUserId(userPrincipal.getId()));
     }
+
 }

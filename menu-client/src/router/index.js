@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Profile from "../views/Profile.vue";
+import DisplayMenu from "../views/DisplayMenu.vue";
 import NotFound from "../views/NotFound.vue";
 import Unauthorized from "../views/Unauthorized.vue";
 
@@ -30,6 +31,11 @@ const routes = [
     path: "/profile",
     name: "profile",
     component: Profile,
+  },
+  {
+    path: "/menu/show/:id",
+    name: "displayMenu",
+    component: DisplayMenu,
   },
   {
     path: "/404",

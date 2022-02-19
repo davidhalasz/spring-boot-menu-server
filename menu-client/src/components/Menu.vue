@@ -153,13 +153,22 @@ export default {
     showMenuModal() {
       this.menu = Object.assign({}, this.selectedMenu);
       this.inputs = [];
-      for (var i = 0; i < this.selectedMenu.types.length; i++) {
+      if (this.selectedMenu.types) {
+        for (var i = 0; i < this.selectedMenu.types.length; i++) {
+          this.inputs.push({
+            types: this.selectedMenu.types[i],
+            products: this.selectedMenu.products[i],
+            prices: this.selectedMenu.prices[i],
+          });
+        }
+      } else {
         this.inputs.push({
-          types: this.selectedMenu.types[i],
-          products: this.selectedMenu.products[i],
-          prices: this.selectedMenu.prices[i],
+          types: "starters",
+          products: "",
+          prices: 0,
         });
       }
+
       $("#menuModal").modal("show");
     },
     addInputs(index) {

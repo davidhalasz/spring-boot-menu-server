@@ -29,7 +29,7 @@
             </thead>
             <tbody>
               <tr v-for="(menu, ind) in menuList" :key="ind">
-                <td>{{ ind + 1 }}</td>
+                <td>{{ menu.id }}</td>
                 <td>{{ menu.companyName }}</td>
                 <td>
                   <button
