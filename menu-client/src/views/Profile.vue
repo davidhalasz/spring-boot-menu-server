@@ -23,8 +23,9 @@
             <thead class="thead-dark bg-dark text-light">
               <tr>
                 <th scope="col" style="width: 10%">#</th>
-                <th scope="col" style="width: 60%">Company Name</th>
+                <th scope="col" style="width: 55%">Company Name</th>
                 <th scope="col" style="width: 20%">QR code</th>
+                <th scope="col" style="width: 5%"></th>
                 <th scope="col" style="width: 5%"></th>
                 <th scope="col" style="width: 5%"></th>
               </tr>
@@ -40,8 +41,25 @@
                   >
                 </td>
                 <td>
-                  <qrcode-vue :value="urls[ind]" size="100" level="H">
+                  <qrcode-vue
+                    :value="urls[ind]"
+                    size=120
+                    level="H"
+                    :id="downloadIds[ind]"
+                  >
                   </qrcode-vue>
+                </td>
+                <td>
+                  <a :id="'download' + ind" download="download.png">
+                    <button
+                      class="btn btn-primary"
+                      @click="
+                        downloadQR(downloadIds[ind], menu.companyName, ind)
+                      "
+                    >
+                      Donwload QR
+                    </button>
+                  </a>
                 </td>
                 <td>
                   <button
@@ -92,6 +110,7 @@ export default {
     return {
       menuList: [],
       urls: [],
+      downloadIds: [],
       selectedMenu: new Menu(),
       errorMessage: "",
       selectedIndex: undefined,
@@ -105,6 +124,7 @@ export default {
       this.menuList = response.data;
       this.menuList.forEach((value) => {
         this.urls.push("http://localhost:4000/menu/show/" + value.id);
+        this.downloadIds.push("canvas" + value.id);
       });
       console.log(this.menuList);
     });
@@ -143,10 +163,20 @@ export default {
     deleteSelectedMenuModal(menu, index) {
       this.selectedMenu = menu;
       this.selectedIndex = index;
-
       nextTick(() => {
         this.$refs["deleteMenuModal"].showDeleteModal();
       });
+    },
+    async downloadQR(canvasId, name, index) {
+      var companyName = name.split(" ").join("_");
+
+      var download = document.getElementById("download" + index);
+      var image = document
+        .getElementById(canvasId)
+        .toDataURL("image/png")
+        .replace("image/png", "image/octet-stream");
+      download.setAttribute("href", image);
+      download.setAttribute("download", companyName + ".png");
     },
   },
 };
