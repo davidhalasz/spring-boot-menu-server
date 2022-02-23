@@ -63,4 +63,11 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+
+.navbar {
+  font-family: "VT323", monospace;
+  font-size: 25px;
+}
+</style>
