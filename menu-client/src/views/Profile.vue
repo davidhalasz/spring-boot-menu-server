@@ -8,11 +8,11 @@
         <div class="card-header">
           <div class="row">
             <div class="col-6">
-              <h3>Added Menu</h3>
+              
             </div>
             <div class="col-6 text-end">
-              <button class="btn btn-primary" @click="createNewMenu">
-                New Menu
+              <button class="actionBtn" @click="createNewMenu">
+                <div class="btn-txt">New Menu</div>
               </button>
             </div>
           </div>
@@ -24,7 +24,7 @@
               <tr>
                 <th scope="col" style="width: 10%">#</th>
                 <th scope="col" style="width: 55%">Company Name</th>
-                <th scope="col" style="width: 20%">QR code</th>
+                <th scope="col" style="width: 20%" class="text-center">QR code</th>
                 <th scope="col" style="width: 5%"></th>
                 <th scope="col" style="width: 5%"></th>
                 <th scope="col" style="width: 5%"></th>
@@ -33,17 +33,17 @@
             <tbody>
               <tr v-for="(menu, ind) in menuList" :key="ind">
                 <td>{{ menu.id }}</td>
-                <td>
+                <td class="name-txt">
                   <router-link
                     :to="{ name: 'displayMenu', params: { id: menu.id } }"
                   >
                     {{ menu.companyName }}</router-link
                   >
                 </td>
-                <td>
+                <td class="text-center">
                   <qrcode-vue
                     :value="urls[ind]"
-                    size=120
+                    size="120"
                     level="H"
                     :id="downloadIds[ind]"
                   >
@@ -52,29 +52,26 @@
                 <td>
                   <a :id="'download' + ind" download="download.png">
                     <button
-                      class="btn btn-primary"
+                      class="actionBtn"
                       @click="
                         downloadQR(downloadIds[ind], menu.companyName, ind)
                       "
                     >
-                      Donwload QR
+                      <div class="btn-txt">Donwload</div>
                     </button>
                   </a>
                 </td>
                 <td>
-                  <button
-                    class="btn btn-primary"
-                    @click="editSelectedMenu(menu)"
-                  >
-                    Edit
+                  <button class="actionBtn" @click="editSelectedMenu(menu)">
+                    <div class="btn-txt">Edit</div>
                   </button>
                 </td>
                 <td>
                   <button
-                    class="btn btn-danger"
+                    class="actionBtn delete"
                     @click="deleteSelectedMenuModal(menu, ind)"
                   >
-                    Delete
+                    <div class="btn-txt delete-txt">Delete</div>
                   </button>
                 </td>
               </tr>
@@ -182,4 +179,40 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.card-header {
+  background-color: transparent;
+  background-image: url("../assets/table_header_bg.png");
+}
+
+.actionBtn {
+  height: 60px;
+  width: 120px;
+  background-color: white;
+  border: 5px black solid;
+}
+.delete {
+  border: 5px red solid;
+}
+.btn-txt {
+  color: white;
+  font-weight: bold;
+  background-color: black;
+  padding: 5px;
+}
+.delete-txt {
+  background-color: red;
+}
+.table tr td {
+  vertical-align: middle;
+}
+.name-txt {
+  font-weight: bold;
+  font-size: 18px;
+  color: black;
+}
+.name-txt a {
+  color: black;
+}
+
+</style>
