@@ -104,15 +104,11 @@
           </div>
 
           <div class="modal-footer">
-            <button
-              class="btn btn-secondary"
-              type="button"
-              data-bs-dismiss="modal"
-            >
-              Close
+            <button class="actionBtn" type="button" data-bs-dismiss="modal">
+              <div class="btn-txt">Close</div>
             </button>
-            <button class="btn btn-primary" type="submit" @click="save">
-              Submit
+            <button class="actionBtn submitBtn" type="submit" @click="save">
+              <div class="btn-txt btn-submit">Submit</div>
             </button>
           </div>
         </form>
@@ -234,3 +230,24 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.actionBtn {
+  height: 60px;
+  width: 120px;
+  background-color: white;
+  border: 5px black solid;
+}
+.submitBtn {
+  border: 5px green solid;
+}
+.btn-txt {
+  color: white;
+  font-weight: bold;
+  background-color: black;
+  padding: 5px;
+}
+.btn-submit {
+  background-color: green;
+}
+</style>
