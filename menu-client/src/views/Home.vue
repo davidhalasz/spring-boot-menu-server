@@ -1,6 +1,6 @@
 <template>
-  <div class="row home">
-    <div class="col-6 home-text h-100 row align-items-center">
+  <div class="row">
+    <div class="col-6 home-text">
       <div>
         <p class="home-title">Create Your Own Menu</p>
         <p class="home-content">
@@ -30,11 +30,9 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 
-.home {
-  height: 100vh;
-}
 .home-text {
   font-family: "VT323", monospace;
+  margin-top: 10%;
 }
 .home-title {
   font-size: 50px;

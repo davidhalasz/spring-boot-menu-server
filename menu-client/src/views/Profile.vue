@@ -7,9 +7,7 @@
       <div class="card">
         <div class="card-header">
           <div class="row">
-            <div class="col-6">
-              
-            </div>
+            <div class="col-6"></div>
             <div class="col-6 text-end">
               <button class="actionBtn" @click="createNewMenu">
                 <div class="btn-txt">New Menu</div>
@@ -24,7 +22,9 @@
               <tr>
                 <th scope="col" style="width: 10%">#</th>
                 <th scope="col" style="width: 55%">Company Name</th>
-                <th scope="col" style="width: 20%" class="text-center">QR code</th>
+                <th scope="col" style="width: 20%" class="text-center">
+                  QR code
+                </th>
                 <th scope="col" style="width: 5%"></th>
                 <th scope="col" style="width: 5%"></th>
                 <th scope="col" style="width: 5%"></th>
@@ -214,5 +214,4 @@ export default {
 .name-txt a {
   color: black;
 }
-
 </style>

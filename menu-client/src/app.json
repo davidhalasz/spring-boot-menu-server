@@ -1,0 +1,8 @@
+{
+    "name": "sha-menu-client",
+    "buildpacks": [
+        {
+            "url": "heroku/nodejs"
+        }
+    ]
+}
