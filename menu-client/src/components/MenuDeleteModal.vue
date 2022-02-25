@@ -15,14 +15,14 @@
 
         <div class="modal-footer">
           <button
-            class="btn btn-secondary"
+            class="actionBtn"
             type="button"
             data-bs-dismiss="modal"
           >
-            Cancel
+            <div class="btn-txt">Cancel</div>
           </button>
-          <button class="btn btn-danger" type="button" @click="deleteMenu">
-            Delete
+          <button class="actionBtn deleteBtn" type="button" @click="deleteMenu">
+            <div class="btn-txt btn-delete">Delete</div>
           </button>
         </div>
       </div>
@@ -47,4 +47,23 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.actionBtn {
+  height: 60px;
+  width: 120px;
+  background-color: white;
+  border: 5px black solid;
+}
+.deleteBtn {
+  border: 5px red solid;
+}
+.btn-txt {
+  color: white;
+  font-weight: bold;
+  background-color: black;
+  padding: 5px;
+}
+.btn-delete {
+  background-color: red;
+}
+</style>
