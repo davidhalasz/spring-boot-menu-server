@@ -138,8 +138,12 @@ export default {
       const itemIndex = this.menuList.findIndex((item) => item.id == menu.id);
       if (itemIndex !== -1) {
         this.menuList[itemIndex] = menu;
+        this.urls[itemIndex] = BASE_CLIENT_URL + "/menu/show/" + menu.id;
+        this.downloadIds[itemIndex] = "canvas" + menu.id;
       } else {
         this.menuList.push(menu);
+        this.urls.push(BASE_CLIENT_URL + "/menu/show/" + menu.id);
+        this.downloadIds.push("canvas" + menu.id);
       }
     },
     editSelectedMenu(menu) {
