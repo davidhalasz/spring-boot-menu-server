@@ -43,24 +43,24 @@
 </template>
 
 <script>
-import vuex from 'vuex';
-import Role from './models/role';
+import vuex from "vuex";
+import Role from "./models/role";
 
 export default {
   computed: {
-    ...vuex.mapGetters(['currentUser']),
+    ...vuex.mapGetters(["currentUser"]),
     isUser() {
       return this.currentUser?.role == Role.USER;
     },
   },
   methods: {
-    ...vuex.mapActions(['clearUser']),
+    ...vuex.mapActions(["clearUser"]),
     logout() {
       this.clearUser();
-      this.$router.push('/login');
+      this.$router.push("/login");
     },
   },
-}
+};
 </script>
 
 <style>

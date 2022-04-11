@@ -1,6 +1,5 @@
 import Store from "../store";
 
-
 export const authHeader = () => {
   const { currentUser } = Store.state;
 
@@ -9,4 +8,3 @@ export const authHeader = () => {
     authorization: "Bearer " + currentUser?.token,
   };
 };
-

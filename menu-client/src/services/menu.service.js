@@ -5,7 +5,6 @@ import { authHeader } from "./base.service";
 const API_URL = BASE_API_URL + "/api/menu";
 
 class MenuService {
-
   saveMenu(menu) {
     return axios.post(API_URL, menu, { headers: authHeader() });
   }

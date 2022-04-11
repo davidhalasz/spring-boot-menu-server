@@ -14,11 +14,7 @@
         <div class="modal-body">Are you sure to delete this menu?</div>
 
         <div class="modal-footer">
-          <button
-            class="actionBtn"
-            type="button"
-            data-bs-dismiss="modal"
-          >
+          <button class="actionBtn" type="button" data-bs-dismiss="modal">
             <div class="btn-txt">Cancel</div>
           </button>
           <button class="actionBtn deleteBtn" type="button" @click="deleteMenu">
