@@ -2,17 +2,21 @@ package com.menu.menuserver.model;
 
 import com.vladmihalcea.hibernate.type.array.IntArrayType;
 import com.vladmihalcea.hibernate.type.array.StringArrayType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @Data
 @Entity
 @Table(name = "menus")
+@AllArgsConstructor
+@NoArgsConstructor
 @TypeDefs({
         @TypeDef(
                 name = "string-array",
@@ -54,4 +58,5 @@ public class Menu {
             columnDefinition = "integer[]"
     )
     private Integer[] prices;
+
 }

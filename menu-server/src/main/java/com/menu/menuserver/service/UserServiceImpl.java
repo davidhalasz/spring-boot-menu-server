@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public User saveUser(User user) {
+    public User saveUser(User user)  {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole(Role.USER);
         user.setCreateTime(LocalDateTime.now());
@@ -32,5 +32,4 @@ public class UserServiceImpl implements UserService {
     {
         return userRepository.findByUsername(username);
     }
-
 }

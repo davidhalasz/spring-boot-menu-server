@@ -19,8 +19,8 @@ public class UserPrincipal implements UserDetails {
 
     private Long id;
     private String username;
-    transient private String password; //don't show up on an serialized places.
-    transient private User user; //user for only login operation, don't use in JWT.
+    transient private String password;
+    transient private User user;
     private Set<GrantedAuthority> authorities;
 
     @Override
